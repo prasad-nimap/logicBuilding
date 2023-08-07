@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strconv"
 )
 
 //Input: digits = [1,2,3]
@@ -16,15 +15,28 @@ func plusOne(digits []int) []int {
 
 	lastelement = lastelement + 1
 
-	if lastelement > 9 {
-		var digit int
-		numberStr := strconv.Itoa(lastelement)
-		digit, _ = strconv.Atoi(string(numberStr))
-		
+	if lastelement > 9 { //10
+		var newarr []int
+		for lastelement > 0 {
+			remainder := lastelement % 10 // 0
+			lastelement /= 10
+			newarr = append(newarr, remainder)
+			//			fmt.Println("new arr:", newarr)
+		}
+		//		fmt.Println("new arr outer:", newarr)
 
-		nums = digits[0 : len(digits)-1]
-		fmt.Println(nums)
-		nums = append(nums, digit)
+		//1 2 9
+		//		fmt.Println("nums ", nums)
+
+		nums = digits[0 : len(digits)-1] // 1 2
+		//		fmt.Println("new arr length:", len(newarr))
+
+		for i := len(newarr) - 1; i > -1; i-- {
+			//			fmt.Println("Entering the loop")
+			nums = append(nums, newarr[i]) // 1 2 1 0
+			//			fmt.Println("append nums", nums)
+
+		}
 
 	} else {
 		nums = digits[0 : len(digits)-1]
@@ -35,6 +47,6 @@ func plusOne(digits []int) []int {
 }
 
 func main() {
-	digits := []int{1, 2, 9}
+	digits := []int{1, 2, 10}
 	fmt.Print(plusOne(digits))
 }
