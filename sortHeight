@@ -1,0 +1,22 @@
+package main
+
+import "fmt"
+
+func main(){
+	names := []string{"mary", "John", "emma"}
+	heights := []int{180, 165, 170}
+	var temp int
+
+	// sort the heights in desc order
+	for i := 0; i < len(heights)-1; i++ {
+		if heights[i] < heights[i+1]{
+			temp = heights[i]
+			heights[i] = heights[i+1]
+			heights[i+1]= temp
+		}
+	}
+
+	//fmt.Print(heights) // <- sorted array
+
+	fmt.Print(names)
+}
